@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20100422191418
+#
+# Table name: comments
+#
+#  id         :integer         not null, primary key
+#  body       :text
+#  song_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Comment < ActiveRecord::Base
 	belongs_to :song
 	has_many :replyships

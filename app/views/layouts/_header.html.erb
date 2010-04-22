@@ -2,8 +2,10 @@
   <%= image_tag("logo.png", :alt => "What's the name of the song?", :class => "round") %>
   <ul class="navigation round">
     <li><%= link_to "Home", songs_url %></li>
-    <li><%= link_to "Sign in", new_user_session_url %></li>
-    <li><%= link_to "Register", new_user_url %></li>
+		<% if current_user %>
+    	<li><%= link_to "Sign in", new_user_session_url %></li>
+    	<li><%= link_to "Register", new_user_url %></li>
+		<% end %>
   </ul>
 </div>
 
