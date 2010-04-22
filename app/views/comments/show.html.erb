@@ -1,0 +1,13 @@
+<p>
+  <b>Body:</b>
+  <%=h @comment.body %>
+</p>
+
+<p>
+  <b>Song:</b>
+  <%=h @comment.song %>
+</p>
+
+
+<%= link_to 'Edit', edit_song_comment_path(@comment.song_id, @comment) %> |
+<%= link_to 'Back', song_comments_path %>

@@ -1,0 +1,22 @@
+<h1>Listing replyships</h1>
+
+<table>
+  <tr>
+    <th>Comment</th>
+    <th>Reply</th>
+  </tr>
+
+<% @replyships.each do |replyship| %>
+  <tr>
+    <td><%=h replyship.comment_id %></td>
+    <td><%=h replyship.reply_id %></td>
+    <td><%= link_to 'Show', song_comment_replyship_path(1,1,replyship.id) %></td>
+    <td><%= link_to 'Edit', edit_replyship_path(replyship) %></td>
+    <td><%= link_to 'Destroy', replyship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New replyship', new_song_comment_replyship_path %>

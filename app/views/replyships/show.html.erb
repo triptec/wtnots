@@ -1,0 +1,13 @@
+<p>
+  <b>Comment:</b>
+  <%=h @replyship.comment_id %>
+</p>
+
+<p>
+  <b>Reply:</b>
+  <%=h @replyship.reply_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_replyship_path(@replyship) %> |
+<%= link_to 'Back', replyships_path %>
