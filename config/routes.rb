@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
 		end
 	end
 	map.resource :user_session
-	map.root :controller => "user_sessions", :action => "new"
+	map.root :songs
 #	map.resources :songs, :has_many => :comments
 #	map.resources :comments, :has_many => :replyships
   # The priority is based upon order of creation: first created -> highest priority.

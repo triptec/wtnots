@@ -15,25 +15,22 @@ module SongsHelper
    #   </p>
  # <% end %>
 #<% end %>
-	def get_all_comments comments, sep = ""
+	def get_all_comments comments
 		i=0
 		str=""
 		comments.each do |comment|
 		i+=1
 			if comment.inverse_replies.empty? && !comment.replies.empty?
-				str << "<br />has replies " + h(comment.body) + "<br />"
-				sep+= "--"
-				str << sep + get_all_comments(comment.replies,sep)
+				str << "<div>" + h(comment.body) + "</div>\n"
+				str << "<div id=sub>\n" + get_all_comments(comment.replies) + "</div>\n"
 			elsif !comment.inverse_replies.empty? && !comment.replies.empty? && comment.id != i
-				str << "is and has replies " + h(comment.body) + "<br />"
-				sep+="--"
-				str << sep + get_all_comments(comment.replies,sep)
-			elsif comment.inverse_replies.empty? && comment.replies.empty?
-				str << "<br />atom " + h(comment.body) + "<br />"
+				str << "<div>" + h(comment.body) + "</div>\n"
+				str << "<div id=sub>\n" + get_all_comments(comment.replies) + "</div>\n"
 			elsif !comment.inverse_replies.empty? && comment.replies.empty? && comment.id != i
-				str << "last reply #{i.to_s} " + h(comment.body)
+				str << "<div>" + h(comment.body) + "</div>\n"
+			elsif comment.inverse_replies.empty? && comment.replies.empty?
+				str << "<div>" + h(comment.body) + "</div>\n"
 			end
-			sep=""
 		end
 		str
 	end
