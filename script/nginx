@@ -1,0 +1,183 @@
+#!/usr/bin/env ruby
+require "optparse"
+require "erb"
+require "ftools"
+
+# Put in script directory under the rails root. Run for instant nginx proxy server.
+module Script
+  class Nginx
+    TEMP_NGINX_CONF_PATH = "tmp/nginx.conf"
+    ORIG_MIME_TYPES_PATH = "config/mime.types"
+    TEMP_MIME_TYPES_PATH = "tmp/mime.types"
+    def initialize
+      @host = "0.0.0.0"
+      @port = 3030
+
+      parse_nginx_options
+      parse_rails_options
+      copy_mime_types
+      load_temp_config unless @config
+    end
+
+    def run
+interrupted = false
+
+trap("INT") { interrupted = true }
+
+      puts "=> Booting nginx"
+      `nginx -p . -c #@config`
+      puts "\e[0;33m=> nginx\e[0m proxy running on: \e[0;33mhttp://#@host:#@port\e[0m"
+      at_exit do
+        `nginx -p . -c #@config -s stop`
+        File.delete @config if temp_config?
+      end
+      puts "\e[0;36m=> rails\e[0m app running on:   \e[0;36mhttp://#@app_host:#@app_port\e[0m"
+      %x{unicorn_rails -o#{@app_host} -p#{@app_port}}
+
+    end
+
+    private
+
+    def parse_nginx_options
+      ARGV.options do |opts|
+        opts.banner = "Usage: #$0 [options] -- [script/server options]"
+
+        opts.on("-P", "--nginx-port=port",
+          "Runs nginx on the specified port.", "Default: #@port",
+          String) { |port| @port = port }
+
+        opts.on("-B", "--nginx-binding=ip",
+          "Binds nginx to the specified ip.", "Default: #@host",
+          String) { |host| @host = host }
+
+        opts.on("-C", "--nginx-config=file",
+          "Use custom nginx configuration file",
+          String) { |config| @config = config }
+
+        opts.on("-h", "--help",
+          "Show this help message.") { puts opts; exit }
+
+        begin
+          opts.parse!
+        rescue OptionParser::ParseError => e
+          warn e
+          puts opts
+          exit 1
+        end
+      end
+    end
+
+    def parse_rails_options
+      @app_host = @host
+      @app_port = @port + 1
+
+      ARGV.clone.options do |opts|
+        opts.on("-p", "--port=port")  { |port| @app_port = port }
+        opts.on("-b", "--binding=ip") { |host| @app_host = host }
+        opts.parse!
+      end
+    end
+
+    def copy_mime_types
+      File.copy ORIG_MIME_TYPES_PATH, "tmp" if File.exists?(ORIG_MIME_TYPES_PATH) && !File.exists?(TEMP_MIME_TYPES_PATH)
+    end
+
+    def load_temp_config
+      File.open TEMP_NGINX_CONF_PATH, "w" do |file|
+        file.write ERB.new(DATA.read).result(binding)
+        @config = file.path
+      end
+    end
+
+    def temp_config?
+      @config == TEMP_NGINX_CONF_PATH
+    end
+  end
+end
+
+Script::Nginx.new.run
+
+__END__
+pid tmp/pids/nginx.pid;
+error_log log/nginx.error.log;
+worker_processes 1;
+
+events {
+  worker_connections 1024;
+  accept_mutex off;
+  use epoll;
+}
+
+http {
+  include mime.types;
+  
+  default_type appliction/octet-stream;
+  
+  access_log log/nginx.access.log combined;
+  
+  sendfile on;
+  
+  tcp_nopush on;
+  tcp_nodelay off;
+
+  client_body_temp_path tmp/nginx.client_body_temp;
+  fastcgi_temp_path tmp/nginx.fastcgi_temp;
+  proxy_temp_path tmp/nginx.proxy_temp;
+
+  gzip on;
+  gzip_http_version 1.0;
+  gzip_proxied any;
+  gzip_min_length 500;
+  gzip_disable "MSIE [1-6]\.";
+  # text/html is auto-gzipped
+  gzip_types text/plain text/xml text/css
+             text/comma-separated-values
+             text/javascript application/x-javascript
+             application/atom+xml;
+  
+  upstream proxy {
+    server <%= @app_host %>:<%= @app_port %> fail_timeout=0;
+  }
+
+  server {
+    listen <%= @port %> default;
+
+    client_max_body_size 4G;
+    server_name <%= @host %>;
+
+    keepalive_timeout 5;
+
+    root ../public;
+
+
+    location / {
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+      proxy_set_header Host $http_host;
+
+      proxy_redirect off;
+      
+      root public;
+      index index.html;
+
+      if (!-f $request_filename) {
+        proxy_pass http://proxy;
+        break;
+      }
+    }
+    # Rails error pages
+    error_page 404 /404.html;
+    error_page 422 /422.html;
+    error_page 500 502 503 504 /500.html;
+
+    location = /404.html {
+      root /path/to/app/current/public;
+    }
+    location = /422.html {
+      root /path/to/app/current/public;
+    }
+    location = /500.html {
+      root /path/to/app/current/public;
+    }
+  }
+}

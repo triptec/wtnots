@@ -1,0 +1,5 @@
+RAILS_ROOT = "/var/webapps/wtnots"
+pid_path = RAILS_ROOT + "/tmp/unicorn.pid"
+socket_path = RAILS_ROOT + "/tmp/unicorn.sock"
+user = "triptec"
+group = "triptec"
