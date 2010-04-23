@@ -9,16 +9,33 @@ describe User do
     User.create!(@attr)
   end
 
+	#username tests
+  
+	it "should require a username" do
+    no_username_user = User.new(@attr.merge(:username => ""))
+    no_username_user.should_not be_valid
+		no_username_user.errors.on(:username).should ==  ["is too short (minimum is 3 characters)", "should use only letters, numbers, spaces, and .-_@ please.", "can't be blank", "is too short (minimum is 5 characters)"]
+  end
+	
+	it "should reject usernames that are too short" do
+    short_username_user = User.new(@attr.merge(:username => "aa"))
+    short_username_user.should_not be_valid
+		short_username_user.errors.on(:username).should ==  ["is too short (minimum is 3 characters)", "is too short (minimum is 5 characters)"]
+  end
+
+  it "should reject usernames that are too long" do
+    long_username = "a" * 51
+    long_username_user = User.new(@attr.merge(:username => long_username))
+    long_username_user.should_not be_valid
+		long_username_user.errors.on(:username).should == "is too long (maximum is 50 characters)"
+  end
+	
+	#name tests	
+
   it "should require a name" do
     no_name_user = User.new(@attr.merge(:name => ""))
     no_name_user.should_not be_valid
 		no_name_user.errors.on(:name).should == "can't be blank"
-  end
-
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-		no_email_user.errors.on(:email).should == ["is too short (minimum is 6 characters)", "should look like an email address.", "can't be blank", "is invalid"]
   end
 
   it "should reject names that are too long" do
@@ -28,7 +45,15 @@ describe User do
 		long_name_user.errors.on(:name).should == "is too long (maximum is 50 characters)"
   end
 
-  it "should accept valid email addresses" do
+	#email tests
+
+  it "should require an email address" do
+    no_email_user = User.new(@attr.merge(:email => ""))
+    no_email_user.should_not be_valid
+		no_email_user.errors.on(:email).should == ["is too short (minimum is 6 characters)", "should look like an email address.", "can't be blank", "is invalid"]
+  end
+  
+it "should accept valid email addresses" do
     addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
     addresses.each do |address|
       valid_email_user = User.new(@attr.merge(:email => address))
@@ -46,7 +71,6 @@ describe User do
   end
 
   it "should reject duplicate email addresses" do
-    # Put a user with given email address into the database.
     User.create!(@attr)
     user_with_duplicate_email = User.new(@attr)
     user_with_duplicate_email.should_not be_valid

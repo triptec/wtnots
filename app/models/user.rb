@@ -25,13 +25,20 @@
 #
 
 class User < ActiveRecord::Base
-	acts_as_authentic
+	acts_as_authentic do |c|
 
 	EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	c.validates_length_of_login_field_options :within => 5..50
+	c.validates_format_of_login_field_options
+	c.validates_uniqueness_of_login_field_options
+	
+	c.validates_length_of_email_field_options
+	c.validates_format_of_email_field_options
+	c.validates_uniqueness_of_email_field_options
+	
+	c.require_password_confirmation
 
-	validates_presence_of :username, :name, :email
-	validates_length_of		:username, :name, :email, :password, :maximum => 50
-	validates_format_of   :email, :with => EmailRegex
-	validates_uniqueness_of :email, :case_sensitive => false
-
+	c.validates_presence_of	:name
+	c.validates_length_of		:name, :within => 5..50
+	end
 end
