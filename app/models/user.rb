@@ -21,7 +21,7 @@
 #  last_login_ip       :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  admin               :boolean
+#  admin               :boolean         not null
 #
 
 class User < ActiveRecord::Base

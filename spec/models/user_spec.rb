@@ -130,4 +130,3 @@ it "should accept valid email addresses" do
 
 
 end
-
