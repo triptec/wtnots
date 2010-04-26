@@ -10,6 +10,9 @@ ActionController::Routing::Routes.draw do |map|
 		end
 	end
 	map.resource :user_session
+  map.signin '/signin', :controller => 'user_sessions', :action => 'new' 
+  map.signout '/signout', :controller => 'user_sessions', :action => 'destroy' 
+  map.signup '/signup', :controller => 'users', :action => 'new' 
 	map.root :songs
 #	map.resources :songs, :has_many => :comments
 #	map.resources :comments, :has_many => :replyships

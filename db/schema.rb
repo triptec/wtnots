@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100422191418) do
+ActiveRecord::Schema.define(:version => 20100424102356) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20100422191418) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",               :default => false, :null => false
+    t.string   "openid_identifier"
   end
+
+  add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"
 
 end
