@@ -1,8 +1,35 @@
+# == Schema Information
+# Schema version: 20100424102356
+#
+# Table name: users
+#
+#  id                  :integer         not null, primary key
+#  username            :string(255)
+#  name                :string(255)
+#  email               :string(255)
+#  crypted_password    :string(255)
+#  password_salt       :string(255)
+#  persistence_token   :string(255)     not null
+#  single_access_token :string(255)     not null
+#  perishable_token    :string(255)     not null
+#  login_count         :integer         default(0), not null
+#  failed_login_count  :integer         default(0), not null
+#  last_request_at     :datetime
+#  current_login_at    :datetime
+#  last_login_at       :datetime
+#  current_login_ip    :string(255)
+#  last_login_ip       :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  admin               :boolean         not null
+#  openid_identifier   :string(255)
+#
+
 require 'spec_helper'
 describe User do
 
   before(:each) do
-    @attr = { :username => "example", :name => "Example User", :email => "user@example.com", :password => "example", :password_confirmation => "example"}
+    @attr = { :username => "example", :name => "Example User", :email => "user@example.com", :password => "example", :password_confirmation => "example", :openid_identifier => ""}
   end
 
   it "should create a new instance given valid attributes" do
@@ -71,6 +98,31 @@ describe User do
 		bad_confirmation_password_user.errors.on(:password).should == "doesn't match confirmation"
   end
 
+  #password tests with openid
+
+	it "should require a password" do
+    no_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "", :password_confirmation => ""))
+    no_password_user.should be_valid
+		no_password_user.errors.on(:password).should == "is too short (minimum is 5 characters)"
+  end
+	
+  it "should reject short password" do
+    short_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "aaa", :password_confirmation => "aaa"))
+    short_password_user.should be_valid
+		short_password_user.errors.on(:password).should == "is too short (minimum is 5 characters)"
+  end
+  
+  it "should reject long password" do
+    long_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "a" * 51, :password_confirmation => "a" * 51))
+    long_password_user.should be_valid
+		long_password_user.errors.on(:password).should == "is too long (maximum is 50 characters)"
+  end
+
+  it "should reject password with bad confirmation" do
+    bad_confirmation_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "aaaaa", :password_confirmation => "AAAAA"))
+    bad_confirmation_password_user.should be_valid
+		bad_confirmation_password_user.errors.on(:password).should == "doesn't match confirmation"
+  end
 	#name tests	
 
   it "should require a name" do

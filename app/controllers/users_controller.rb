@@ -15,11 +15,13 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_back_or_default user_url(current_user)
-    else
-      render :action => :new
+    @user.save do |result|
+      if result
+        flash[:notice] = "Account registered!"
+        redirect_back_or_default user_url(@user)
+      else
+        render :action => :new
+      end
     end
   end
   
@@ -35,13 +37,17 @@ class UsersController < ApplicationController
   
   def update
     @user = @current_user # makes our views "cleaner" and more consistent
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
-      redirect_to user_url(current_user)
-    else
-      render :action => :edit
+    @user.attributes = params[:user]
+    @user.save do |result|
+      if result
+        flash[:notice] = "Account updated!"
+        redirect_to user_url(current_user)
+      else
+        render :action => :edit
+      end
     end
   end
+
   def destroy
     user = User.find(params[:id]).destroy
     flash[:success] = "User destroyed."

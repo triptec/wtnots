@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20100422191418
+# Schema version: 20100424102356
 #
 # Table name: users
 #
@@ -22,6 +22,7 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  admin               :boolean         not null
+#  openid_identifier   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -34,7 +35,8 @@ class User < ActiveRecord::Base
 	c.validates_length_of_email_field_options
 	c.validates_format_of_email_field_options
 	c.validates_uniqueness_of_email_field_options
-	
+
+  c.openid_required_fields = :email
   
   c.validates_length_of_password_field_options :within => 5..50
 	c.require_password_confirmation
@@ -42,4 +44,13 @@ class User < ActiveRecord::Base
 	c.validates_presence_of	:name
 	c.validates_length_of		:name, :within => 5..50
 	end
+
+  cattr_reader :per_page
+  @@per_page = 10
+
+  private
+    def map_openid_registration(registration)
+      self.email = registration["email"] if email.blank?
+      #self.username = registration["nickname"] if nickname.blank?
+    end
 end

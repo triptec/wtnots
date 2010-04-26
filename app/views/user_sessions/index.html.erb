@@ -1,0 +1,11 @@
+<h2>All users</h2>
+
+<% if @user_sessions %>
+  <%= will_paginate %>
+
+  <ul class="users">
+   <%= render @user_sessions %>
+  </ul>
+
+  <%= will_paginate %>
+<% end %>
