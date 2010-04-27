@@ -3,3 +3,4 @@ will_paginate
 rack-openid
 factory_girl
 webrat
+faker
