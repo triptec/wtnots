@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :correct_user
   filter_parameter_logging :password, :password_confirmation
   
   private
@@ -14,11 +14,32 @@ class ApplicationController < ActionController::Base
       @current_user = current_user_session && current_user_session.record
     end
     
+    def correct_user(user = User.find(params[:id]))
+      return true if current_user && current_user.admin
+      return true if current_user == user
+      false
+    end
+
+    def admin_user
+      return @current_user.admin if defined?(@current_user)
+      false
+    end
+    
     def require_user
       unless current_user
         store_location
         flash[:notice] = "You must be logged in to access this page"
         redirect_to new_user_session_url
+        return false
+      end
+    end
+    
+    def require_specific_user
+      unless correct_user || current_user.admin
+        store_location
+        flash[:notice] = "Action not allowed"
+        redirect_to user_path(params[:id])
+        #redirect_to new_user_session_url
         return false
       end
     end

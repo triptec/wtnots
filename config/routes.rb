@@ -3,13 +3,15 @@ ActionController::Routing::Routes.draw do |map|
 
 	map.resources :users
   map.resources :replyships
+	map.resource :user_session
 #  map.resources :comments
   map.resources :songs do |song|
 		song.resources :comments do |comment|
 			comment.resources :replyships
 		end
 	end
-	map.resource :user_session
+	#map.resources :user_sessions
+  map.active_users '/active_users', :controller => 'user_sessions', :action => 'index' 
   map.signin '/signin', :controller => 'user_sessions', :action => 'new' 
   map.signout '/signout', :controller => 'user_sessions', :action => 'destroy' 
   map.signup '/signup', :controller => 'users', :action => 'new' 

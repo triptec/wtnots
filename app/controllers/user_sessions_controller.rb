@@ -15,10 +15,10 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
       if result
-        flash[:notice] = "Login successful!" + result.to_yaml
-        redirect_back_or_default user_url(@user_session)
+        flash[:notice] = "Login successful!"
+        redirect_back_or_default user_url(@user_session.user)
       else
-        flash[:notice] = "Login failed" + result.to_yaml
+        flash[:notice] = "Login failed"
         render :action => :new
       end
     end

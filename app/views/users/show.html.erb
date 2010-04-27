@@ -1,6 +1,23 @@
+<h2><%=h @user.name %></h2>
+<%= gravatar_for @user %>
 <p>
   <b>Username:</b>
   <%=h @user.username %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%=h @user.admin %>
 </p>
 
 <p>
@@ -33,5 +50,7 @@
   <%=h @user.current_login_ip %>
 </p>
 
-
-<%= link_to 'Edit', edit_user_path %>
+<% if correct_user || current_user.admin %> 
+  <%= link_to 'Edit', edit_user_path(@user) %>
+  <%= link_to 'Delete', @user, :method => :delete, :confirm => "Are you sure?" %>
+<% end %>

@@ -9,6 +9,7 @@ namespace :db do
                  :email => "triptec@gmail.com",
                  :password => "foobar",
                  :password_confirmation => "foobar",
+                 :admin => true,
                  :openid_identifier => "")
     99.times do |n|
       username = Faker::Internet.user_name

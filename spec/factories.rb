@@ -1,4 +1,4 @@
-Factory.define :user do |user|
+Factory.define :user_openid do |user|
   user.username               "usern"
   user.name                   "UserFirstn UserLastn"
   user.email                  "usern@gmail.com"
@@ -19,3 +19,14 @@ end
 Factory.sequence :openid_identifier do |n|
   "https://www.google.com/accounts/o8/id?id=#{n}" 
 end
+
+Factory.define :user do |user|
+  user.username               "usern"
+  user.name                   "UserFirstn UserLastn"
+  user.email                  "usern@gmail.com"
+  user.password               "passwordn"
+  user.password_confirmation  "passwordn"
+  user.openid_identifier      ""
+  user.admin                  false
+end
+

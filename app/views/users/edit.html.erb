@@ -2,8 +2,12 @@
 
 <% form_for @user, :url => user_path do |f| %>
   <%= f.error_messages %>
+<div>
+  <%= gravatar_for @user %>
+  <a href="http://gravatar.com/emails">change</a>
+</div>
   <%= render :partial => "form", :object => f %>
   <%= f.submit "Update" %>
 <% end %>
 
-<br /><%= link_to "My Profile", user_path %>
+<br /><%= link_to "Profile", user_path %>

@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
+  before_filter :require_specific_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
 
 	def index
 		@title = "All Users"
-    @users = User.paginate(:page => params[:page])
+    #@users = User.paginate(:page => params[:page])
+    @users = User.find(:all)
 	end
   
   def new
@@ -18,10 +20,12 @@ class UsersController < ApplicationController
     @user.save do |result|
       if result
         flash[:notice] = "Account registered!"
-        redirect_back_or_default user_url(@user.id)
-      else
-        render :action => :new
+        redirect_back_or_default user_path(@user.id)
       end
+    end
+    if @user.errors.size != 0 
+		  @title = "Register"
+      render :action => :new
     end
   end
   
@@ -31,12 +35,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @current_user
+    @user = User.find(params[:id])
 		@title = "Edit Profile: " + @user.username
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    #@user = @current_user # makes our views "cleaner" and more consistent
+    @user = User.find(params[:id])
     @user.attributes = params[:user]
     @user.save do |result|
       if result

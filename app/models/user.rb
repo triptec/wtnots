@@ -45,8 +45,8 @@ class User < ActiveRecord::Base
 	c.validates_length_of		:name, :within => 5..50
 	end
 
-  cattr_reader :per_page
-  @@per_page = 10
+#  cattr_reader :per_page
+#  @@per_page = 10
 
   private
     def map_openid_registration(registration)
