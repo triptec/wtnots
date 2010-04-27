@@ -3,7 +3,7 @@
   <ul class="navigation round">
     <li><%= link_to "Home", songs_url %></li>
     <% if current_user %>
-   	  <li><%= link_to "Active Users", active_users_url %></li>
+      <li><%= link_to "Active Users", active_users_url, :id => "active_users" %></li>
    	  <li><%= link_to "Users", users_url %></li>
    	  <li><%= link_to "Profile", user_url(current_user) %></li>
       <li><%= link_to "Logout", signout_url %></li>

@@ -164,7 +164,7 @@ describe UsersController do
 
     describe "when not signed in" do
       before(:each) do
-#        @user = Factory(:user)
+        @user = Factory(:user)
 #        User.stub!(:find, @user.id).and_return(@user)
       end
 
@@ -173,6 +173,12 @@ describe UsersController do
 	      response.should_not be_success
         response.should redirect_to(new_user_session_url)
 	    end
+
+      it "should deny access to 'edit'" do
+        get :edit, :id => @user
+        response.should redirect_to(new_user_session_path)
+      end
+
     end
 
     describe "when signed in" do
