@@ -100,28 +100,28 @@ describe User do
 
   #password tests with openid
 
-	it "should require a password" do
+	it "should not require a password" do
     no_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "", :password_confirmation => ""))
     no_password_user.should be_valid
-		no_password_user.errors.on(:password).should == "is too short (minimum is 5 characters)"
+		no_password_user.errors.on(:password).should == nil 
   end
 	
-  it "should reject short password" do
+  it "should not reject short password" do
     short_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "aaa", :password_confirmation => "aaa"))
     short_password_user.should be_valid
-		short_password_user.errors.on(:password).should == "is too short (minimum is 5 characters)"
+		short_password_user.errors.on(:password).should == nil 
   end
   
-  it "should reject long password" do
+  it "should not reject long password" do
     long_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "a" * 51, :password_confirmation => "a" * 51))
     long_password_user.should be_valid
-		long_password_user.errors.on(:password).should == "is too long (maximum is 50 characters)"
+		long_password_user.errors.on(:password).should == nil 
   end
 
-  it "should reject password with bad confirmation" do
+  it "should not reject password with bad confirmation" do
     bad_confirmation_password_user = User.new(@attr.merge(:openid_identifier => "http://test.test.com", :password => "aaaaa", :password_confirmation => "AAAAA"))
     bad_confirmation_password_user.should be_valid
-		bad_confirmation_password_user.errors.on(:password).should == "doesn't match confirmation"
+		bad_confirmation_password_user.errors.on(:password).should == nil 
   end
 	#name tests	
 

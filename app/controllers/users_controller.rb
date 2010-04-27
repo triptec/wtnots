@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @user.save do |result|
       if result
         flash[:notice] = "Account registered!"
-        redirect_back_or_default user_url(@user)
+        redirect_back_or_default user_url(@user.id)
       else
         render :action => :new
       end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    @user = User.find(params[:id])
 		@title = "Profile: " + @user.username 
   end
 
