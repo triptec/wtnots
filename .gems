@@ -4,3 +4,4 @@ rack-openid
 factory_girl
 webrat
 faker
+crummy

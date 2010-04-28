@@ -41,18 +41,19 @@ class ReplyshipsController < ApplicationController
   # POST /replyships
   # POST /replyships.xml
   def create
+    @comment = Comment.new(params[:comment])
     @replyship = Replyship.new(params[:replyship])
-
-    respond_to do |format|
-      if @replyship.save
-        flash[:notice] = 'Replyship was successfully created.'
-        format.html { redirect_to(@replyship) }
-        format.xml  { render :xml => @replyship, :status => :created, :location => @replyship }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @replyship.errors, :status => :unprocessable_entity }
-      end
-    end
+    
+#    respond_to do |format|
+#      if @replyship.save
+#        flash[:notice] = 'Replyship was successfully created.'
+#        format.html { redirect_to(@replyship) }
+#        format.xml  { render :xml => @replyship, :status => :created, :location => @replyship }
+#      else
+#        format.html { render :action => "new" }
+#        format.xml  { render :xml => @replyship.errors, :status => :unprocessable_entity }
+#      end
+#    end
   end
 
   # PUT /replyships/1
