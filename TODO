@@ -1,1 +1,3 @@
 1. Write more tests for login and signup with openid
+2. respond with 404 on no id and redirect
+3. Write test for destruction of users

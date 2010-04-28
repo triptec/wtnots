@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user_session, :current_user, :correct_user
   filter_parameter_logging :password, :password_confirmation
-  
+  add_crumb "Home", "/"  
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
     def require_specific_user
       unless correct_user || current_user.admin
         store_location
-        flash[:notice] = "Action not allowed"
-        redirect_to user_path(params[:id])
+        flash[:notice] = "You are not allowed"
+        redirect_to :action => :show
         #redirect_to new_user_session_url
         return false
       end

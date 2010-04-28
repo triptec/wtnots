@@ -1,3 +1,6 @@
+<%= link_to 'Back', songs_path %> |
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Delete', {:action => "destroy", :id =>@song}, :confirm => "Are you sure?" %> 
 <p>
   <b>Title:</b>
   <%=h @song.title %>
@@ -10,34 +13,15 @@
 
 <p>
   <b>User:</b>
-  <%=h @song.user %>
+  <%=h @song.user.username %>
 </p>
 
 
-<%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %>
 <%= print_all_comments(@song) %>
 <br />
 <br />
 <br />
 <br />
-<% unless @song.comments.empty? %>
-
-  <% @song.comments.each do |comment| %>
-      <p>
-				<% if comment.inverse_replies.empty? %>
-        <%=h comment.body %>
-				<% unless comment.replies.empty? %>
-  				<% comment.replies.each do |reply| %>
-						<br />--
-						<%=h reply.body %>
-					<% end %>
-				<% end %>
-				<% end %>
-      </p>
-  <% end %>
-<% end %>
-
 <h2>Comment</h2>
 <%= render :partial => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
 

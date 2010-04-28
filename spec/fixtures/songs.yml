@@ -11,12 +11,10 @@
 #  updated_at  :datetime
 #
 
-class Song < ActiveRecord::Base
-	has_many :comments
-	belongs_to :user, :validate => true
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-
-  validates_presence_of :user_id, :title, :description
-  validates_length_of :title, :within => 5..255 
-  validates_length_of :description, :minimum => 20 
-end
+# one:
+#   column: value
+#
+# two:
+#   column: value

@@ -8,7 +8,6 @@ $	/var/webapps/wtnots/public/javascripts/prototype.js	/^    $("__onDOMContentLoa
 $$	/var/webapps/wtnots/public/javascripts/prototype.js	/^function $$() {$/;"	f
 $F	/var/webapps/wtnots/public/javascripts/prototype.js	/^var $F = Form.Element.Methods.getValue;$/;"	v
 <=>	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/version.rb	/^    def <=>(version)$/;"	f	class:AuthlogicOpenid.Version
-ActiveSupport	/var/webapps/wtnots/test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c
 ActiveSupport	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c
 ActsAsAuthentic	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/acts_as_authentic.rb	/^  module ActsAsAuthentic$/;"	m	class:AuthlogicOpenid
 ActsAsAuthenticTest	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/acts_as_authentic_test.rb	/^class ActsAsAuthenticTest < ActiveSupport::TestCase$/;"	c
@@ -26,15 +25,11 @@ AuthlogicOpenid	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogi
 Autocompleter.Base	/var/webapps/wtnots/public/javascripts/controls.js	/^Autocompleter.Base.prototype.getTokenBounds.getFirstDifferencePos = function(newS, oldS) {$/;"	c
 Autocompleter.Base.getTokenBounds	/var/webapps/wtnots/public/javascripts/controls.js	/^Autocompleter.Base.prototype.getTokenBounds.getFirstDifferencePos = function(newS, oldS) {$/;"	m
 Boot	/var/webapps/wtnots/config/boot.rb	/^  class Boot$/;"	c
-BrowsingTest	/var/webapps/wtnots/test/performance/browsing_test.rb	/^class BrowsingTest < ActionController::PerformanceTest$/;"	c
 Class.Methods.addMethods	/var/webapps/wtnots/public/javascripts/prototype.js	/^  addMethods: function(source) {$/;"	m
 Class.create	/var/webapps/wtnots/public/javascripts/prototype.js	/^  create: function() {$/;"	m
 Comment	/var/webapps/wtnots/app/models/comment.rb	/^class Comment < ActiveRecord::Base$/;"	c
-CommentTest	/var/webapps/wtnots/test/unit/comment_test.rb	/^class CommentTest < ActiveSupport::TestCase$/;"	c
 CommentsController	/var/webapps/wtnots/app/controllers/comments_controller.rb	/^class CommentsController < ApplicationController$/;"	c
-CommentsControllerTest	/var/webapps/wtnots/test/functional/comments_controller_test.rb	/^class CommentsControllerTest < ActionController::TestCase$/;"	c
 CommentsHelper	/var/webapps/wtnots/app/helpers/comments_helper.rb	/^module CommentsHelper$/;"	m
-CommentsHelperTest	/var/webapps/wtnots/test/unit/helpers/comments_helper_test.rb	/^class CommentsHelperTest < ActionView::TestCase$/;"	c
 Config	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/acts_as_authentic.rb	/^    module Config$/;"	m	class:AuthlogicOpenid.ActsAsAuthentic
 Config	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/session.rb	/^    module Config$/;"	m	class:AuthlogicOpenid.Session
 CreateComments	/var/webapps/wtnots/db/migrate/20100420144152_create_comments.rb	/^class CreateComments < ActiveRecord::Migration$/;"	c
@@ -133,22 +128,16 @@ PublicMethods	/var/webapps/wtnots/vendor/plugins/gravatar/lib/gravatar.rb	/^  mo
 Rails	/var/webapps/wtnots/config/boot.rb	/^module Rails$/;"	m
 Rails	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^module Rails$/;"	m
 Replyship	/var/webapps/wtnots/app/models/replyship.rb	/^class Replyship < ActiveRecord::Base$/;"	c
-ReplyshipTest	/var/webapps/wtnots/test/unit/replyship_test.rb	/^class ReplyshipTest < ActiveSupport::TestCase$/;"	c
 ReplyshipsController	/var/webapps/wtnots/app/controllers/replyships_controller.rb	/^class ReplyshipsController < ApplicationController$/;"	c
-ReplyshipsControllerTest	/var/webapps/wtnots/test/functional/replyships_controller_test.rb	/^class ReplyshipsControllerTest < ActionController::TestCase$/;"	c
 ReplyshipsHelper	/var/webapps/wtnots/app/helpers/replyships_helper.rb	/^module ReplyshipsHelper$/;"	m
-ReplyshipsHelperTest	/var/webapps/wtnots/test/unit/helpers/replyships_helper_test.rb	/^class ReplyshipsHelperTest < ActionView::TestCase$/;"	c
 Result	/var/webapps/wtnots/vendor/plugins/open_id_authentication/lib/open_id_authentication.rb	/^  class Result$/;"	c
 Script	/var/webapps/wtnots/script/nginx	/^module Script$/;"	m
 Session	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/session.rb	/^  module Session$/;"	m	class:AuthlogicOpenid
 SessionController	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^class SessionController < ActionController::Base$/;"	c
 SessionTest	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/session_test.rb	/^class SessionTest < ActiveSupport::TestCase$/;"	c
 Song	/var/webapps/wtnots/app/models/song.rb	/^class Song < ActiveRecord::Base$/;"	c
-SongTest	/var/webapps/wtnots/test/unit/song_test.rb	/^class SongTest < ActiveSupport::TestCase$/;"	c
 SongsController	/var/webapps/wtnots/app/controllers/songs_controller.rb	/^class SongsController < ApplicationController$/;"	c
-SongsControllerTest	/var/webapps/wtnots/test/functional/songs_controller_test.rb	/^class SongsControllerTest < ActionController::TestCase$/;"	c
 SongsHelper	/var/webapps/wtnots/app/helpers/songs_helper.rb	/^module SongsHelper$/;"	m
-SongsHelperTest	/var/webapps/wtnots/test/unit/helpers/songs_helper_test.rb	/^class SongsHelperTest < ActionView::TestCase$/;"	c
 Sortable.SERIALIZE_RULE	/var/webapps/wtnots/public/javascripts/dragdrop.js	/^  SERIALIZE_RULE: \/^[^_\\-](?:[A-Za-z0-9\\-\\_]*)[_](.*)$\/,$/;"	p
 SortableObserver	/var/webapps/wtnots/public/javascripts/dragdrop.js	/^var SortableObserver = Class.create({$/;"	v
 String	/var/webapps/wtnots/public/javascripts/effects.js	/^String.prototype.parseColor = function() {$/;"	c
@@ -160,19 +149,15 @@ User	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/libs/user.rb	/^cla
 UserSession	/var/webapps/wtnots/app/models/user_session.rb	/^class UserSession < Authlogic::Session::Base$/;"	c
 UserSession	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/libs/user_session.rb	/^class UserSession < Authlogic::Session::Base$/;"	c
 UserSessionsController	/var/webapps/wtnots/app/controllers/user_sessions_controller.rb	/^class UserSessionsController < ApplicationController$/;"	c
-UserSessionsControllerTest	/var/webapps/wtnots/test/functional/user_sessions_controller_test.rb	/^class UserSessionsControllerTest < ActionController::TestCase$/;"	c
 UserSessionsHelper	/var/webapps/wtnots/app/helpers/user_sessions_helper.rb	/^module UserSessionsHelper$/;"	m
-UserSessionsHelperTest	/var/webapps/wtnots/test/unit/helpers/user_sessions_helper_test.rb	/^class UserSessionsHelperTest < ActionView::TestCase$/;"	c
-UserTest	/var/webapps/wtnots/test/unit/user_test.rb	/^class UserTest < ActiveSupport::TestCase$/;"	c
 UsersController	/var/webapps/wtnots/app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
-UsersControllerTest	/var/webapps/wtnots/test/functional/users_controller_test.rb	/^class UsersControllerTest < ActionController::TestCase$/;"	c
 UsersHelper	/var/webapps/wtnots/app/helpers/users_helper.rb	/^module UsersHelper$/;"	m
-UsersHelperTest	/var/webapps/wtnots/test/unit/helpers/users_helper_test.rb	/^class UsersHelperTest < ActionView::TestCase$/;"	c
 VERSION	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^  module VERSION$/;"	m	class:Rails
 VendorBoot	/var/webapps/wtnots/config/boot.rb	/^  class VendorBoot < Boot$/;"	c
 Version	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/version.rb	/^  class Version$/;"	c	class:AuthlogicOpenid
 []	/var/webapps/wtnots/vendor/plugins/authlogic_openid/lib/authlogic_openid/version.rb	/^    def self.[](major, minor, tiny)$/;"	F	class:AuthlogicOpenid.Version
 []	/var/webapps/wtnots/vendor/plugins/open_id_authentication/lib/open_id_authentication.rb	/^    def self.[](code)$/;"	F	class:Result
+admin_user	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def admin_user$/;"	f	class:ApplicationController
 annotate	/var/webapps/wtnots/vendor/plugins/annotate_models/lib/annotate_models.rb	/^  def self.annotate(klass, header)$/;"	F	class:AnnotateModels
 annotate_one_file	/var/webapps/wtnots/vendor/plugins/annotate_models/lib/annotate_models.rb	/^  def self.annotate_one_file(file_name, info_block)$/;"	F	class:AnnotateModels
 assert_not_redirecting	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^    def assert_not_redirecting$/;"	f	class:ActiveSupport
@@ -192,6 +177,7 @@ child.id	/var/webapps/wtnots/public/javascripts/dragdrop.js	/^        id: encode
 complete_open_id_authentication	/var/webapps/wtnots/vendor/plugins/open_id_authentication/lib/open_id_authentication.rb	/^    def complete_open_id_authentication$/;"	f
 controller	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/test_helper.rb	/^    def controller$/;"	f	class:ActiveSupport
 copy_mime_types	/var/webapps/wtnots/script/nginx	/^    def copy_mime_types$/;"	f	class:Script.Nginx
+correct_user	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def correct_user(user = User.find(params[:id]))$/;"	f	class:ApplicationController
 create	/var/webapps/wtnots/app/controllers/comments_controller.rb	/^  def create$/;"	f	class:CommentsController
 create	/var/webapps/wtnots/app/controllers/replyships_controller.rb	/^  def create$/;"	f	class:ReplyshipsController
 create	/var/webapps/wtnots/app/controllers/songs_controller.rb	/^  def create$/;"	f	class:SongsController
@@ -288,6 +274,7 @@ quote	/var/webapps/wtnots/vendor/plugins/annotate_models/lib/annotate_models.rb	
 read_environment_rb	/var/webapps/wtnots/config/boot.rb	/^        def read_environment_rb$/;"	f	class:GemBoot
 redirect_back_or_default	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def redirect_back_or_default(default)$/;"	f	class:ApplicationController
 require_no_user	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def require_no_user$/;"	f	class:ApplicationController
+require_specific_user	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def require_specific_user$/;"	f	class:ApplicationController
 require_user	/var/webapps/wtnots/app/controllers/application_controller.rb	/^    def require_user$/;"	f	class:ApplicationController
 root.children	/var/webapps/wtnots/public/javascripts/dragdrop.js	/^      children: [],$/;"	p
 root.id	/var/webapps/wtnots/public/javascripts/dragdrop.js	/^      id: null,$/;"	p
@@ -310,7 +297,6 @@ subclass	/var/webapps/wtnots/public/javascripts/prototype.js	/^      subclass.pr
 successful?	/var/webapps/wtnots/vendor/plugins/open_id_authentication/lib/open_id_authentication.rb	/^    def successful?$/;"	f	class:Result
 temp_config?	/var/webapps/wtnots/script/nginx	/^    def temp_config?$/;"	f	class:Script
 test_blank_openid_identifer_gets_set_to_nil	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/acts_as_authentic_test.rb	/^  def test_blank_openid_identifer_gets_set_to_nil$/;"	f	class:ActsAsAuthenticTest
-test_homepage	/var/webapps/wtnots/test/performance/browsing_test.rb	/^  def test_homepage$/;"	f	class:BrowsingTest
 test_included	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/acts_as_authentic_test.rb	/^  def test_included$/;"	f	class:ActsAsAuthenticTest
 test_invalid_openid_identifier	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/acts_as_authentic_test.rb	/^  def test_invalid_openid_identifier$/;"	f	class:ActsAsAuthenticTest
 test_openid_identifier	/var/webapps/wtnots/vendor/plugins/authlogic_openid/test/session_test.rb	/^  def test_openid_identifier$/;"	f	class:SessionTest

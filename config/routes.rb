@@ -1,15 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :comments
-
 	map.resources :users
   map.resources :replyships
 	map.resource :user_session
 #  map.resources :comments
   map.resources :songs do |song|
-		song.resources :comments do |comment|
+		song.resources :comments, :member => {:reply => :get} do |comment|
 			comment.resources :replyships
 		end
 	end
+
 	#map.resources :user_sessions
   map.active_users '/active_users', :controller => 'user_sessions', :action => 'index' 
   map.signin '/signin', :controller => 'user_sessions', :action => 'new' 

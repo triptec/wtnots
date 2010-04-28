@@ -183,3 +183,11 @@ ul.users {
   list-style: none;
 }
 
+
+/*Song show page*/
+.comment {
+  border-left:1px dotted #999;
+  margin:5px 10px;
+  padding-left:5px;
+  padding-bottom:10px;
+}

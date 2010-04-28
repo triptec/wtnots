@@ -25,6 +25,7 @@ class ReplyshipsController < ApplicationController
   # GET /replyships/new.xml
   def new
     #@replyship = Replyship.new
+    @comment = Comment.new(:song_id => params[:song_id])
 		@replyship = Comment.find(params[:comment_id]).replyships.build
     respond_to do |format|
       format.html # new.html.erb

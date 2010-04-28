@@ -3,6 +3,7 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.text :body
       t.references :song
+      t.references :user
 
       t.timestamps
     end

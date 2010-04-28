@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20100424102356) do
   create_table "comments", :force => true do |t|
     t.text     "body"
     t.integer  "song_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,9 +27,9 @@ ActiveRecord::Schema.define(:version => 20100424102356) do
   end
 
   create_table "songs", :force => true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "user_id"
+    t.string   "title",       :null => false
+    t.text     "description", :null => false
+    t.integer  "user_id",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

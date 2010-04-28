@@ -1,18 +1,22 @@
 <h1>New replyship</h1>
 
-<% form_for(@replyship) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@replyship,@comment) do |fr,fc| %>
+  <%= fr.error_messages %>
 
   <p>
-    <%= f.label :comment_id %><br />
-    <%= f.text_field :comment_id %>
+    <%= fr.label :comment_id %><br />
+    <%= fr.text_field :comment_id %>
   </p>
   <p>
-    <%= f.label :reply_id %><br />
-    <%= f.text_field :reply_id %>
+    <%= fr.label :reply_id %><br />
+    <%= fr.text_field :reply_id %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= fc.label :comment, :body %><br />
+    <%= fc.text_field :comment, :body %>
+  </p>
+  <p>
+    <%= fr.submit 'Create' %>
   </p>
 <% end %>
 

@@ -1,7 +1,7 @@
 class UserSessionsController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
-  
+  add_crumb ("Active Users") {|instance| instance.send :active_users_path} 
   def index
     @user_sessions = User.paginate(:page => params[:page], :conditions => ["last_request_at > ?", 30.minutes.ago])
     #@user_sessions = User.paginate(:page => params[:page])

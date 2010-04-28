@@ -17,13 +17,20 @@ namespace :db do
       email = Faker::Internet.email
       password  = "password"
       openid_identifier = ""
-      User.create!(:username => username + "_usr",
+      user = User.create!(:username => username + "_usr",
                    :name => name,
                    :email => email,
                    :password => password,
                    :password_confirmation => password,
                    :openid_identifier => openid_identifier)
+      4.times do |m|
+        title = Faker::Lorem.words(5).join(" ")
+        description = Faker::Lorem.paragraphs(2).join
+        user_id = user.id
+        Song.create!(:title => title,
+                     :description => description,
+                     :user_id => user_id)
+      end
     end
   end
 end
-

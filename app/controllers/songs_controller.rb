@@ -1,7 +1,13 @@
+require 'application_helper'
 class SongsController < ApplicationController
+  before_filter :require_user, :only => [:new, :create]
+  before_filter :require_specific_user, :only => [:edit, :update, :destroy]
+  add_crumb ("Songs"){|instance| instance.send :songs_path} 
+  before_filter :interaction, :only => [:show, :edit]
   # GET /songs
   # GET /songs.xml
   def index
+    @title = "Songs"
     @songs = Song.all
 
     respond_to do |format|
@@ -12,9 +18,7 @@ class SongsController < ApplicationController
 
   # GET /songs/1
   # GET /songs/1.xml
-  def show
-    @song = Song.find(params[:id])
-
+  def show 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @song }
@@ -34,7 +38,6 @@ class SongsController < ApplicationController
 
   # GET /songs/1/edit
   def edit
-    @song = Song.find(params[:id])
   end
 
   # POST /songs
@@ -81,5 +84,9 @@ class SongsController < ApplicationController
       format.html { redirect_to(songs_url) }
       format.xml  { head :ok }
     end
+  end
+  def interaction
+    @song = Song.find(params[:id])
+    add_crumb @song.title, @song
   end
 end

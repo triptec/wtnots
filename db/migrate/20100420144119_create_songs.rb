@@ -1,9 +1,9 @@
 class CreateSongs < ActiveRecord::Migration
   def self.up
     create_table :songs do |t|
-      t.string :title
-      t.text :description
-      t.references :user
+      t.string :title, :null => false
+      t.text :description, :null => false
+      t.references :user, :null => false
 
       t.timestamps
     end

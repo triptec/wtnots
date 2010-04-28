@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:show, :edit, :update]
   before_filter :require_specific_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
+  add_crumb ("Users") {|instance| instance.send :users_path} 
+  before_filter :interaction, :only => [:show, :edit]
 
 	def index
 		@title = "All Users"
@@ -30,12 +32,10 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
 		@title = "Profile: " + @user.username 
   end
 
   def edit
-    @user = User.find(params[:id])
 		@title = "Edit Profile: " + @user.username
   end
   
@@ -57,5 +57,9 @@ class UsersController < ApplicationController
     user = User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
+  end
+  def interaction
+    @user = User.find(params[:id])
+    add_crumb @user.username, @user  
   end
 end

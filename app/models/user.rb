@@ -26,6 +26,8 @@
 #
 
 class User < ActiveRecord::Base
+  has_many :songs
+  has_many :comments
 	acts_as_authentic do |c|
 
 	c.validates_length_of_login_field_options :within => 5..50

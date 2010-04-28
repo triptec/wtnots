@@ -15,29 +15,38 @@ module SongsHelper
    #   </p>
  # <% end %>
 #<% end %>
-	def get_all_comments comments
-		i=0
-		str=""
+  def get_all_replies comments
+    str = ""
 		comments.each do |comment|
-		i+=1
-			if comment.inverse_replies.empty? && !comment.replies.empty?
-				str << "<div>" + h(comment.body) + "</div>\n"
-				str << "<div id=sub>\n" + get_all_comments(comment.replies) + "</div>\n"
-			elsif !comment.inverse_replies.empty? && !comment.replies.empty? && comment.id != i
-				str << "<div>" + h(comment.body) + "</div>\n"
-				str << "<div id=sub>\n" + get_all_comments(comment.replies) + "</div>\n"
-			elsif !comment.inverse_replies.empty? && comment.replies.empty? && comment.id != i
-				str << "<div>" + h(comment.body) + "</div>\n"
-			elsif comment.inverse_replies.empty? && comment.replies.empty?
-				str << "<div>" + h(comment.body) + "</div>\n"
-			end
+        str << "by: " + link_to(comment.user.username, user_path(comment.user)) + " "+ time_ago_in_words(comment.created_at) + " ago "
+		    str << link_to("Reply", reply_song_comment_path(comment.song.id,comment.id))  + "<br />"
+		    str << "<div class=\"comment\">" + h(comment.body) + "</div>\n"
+      
+        if !comment.replies.empty?
+		      str << "<div class=\"comment\">\n" + get_all_replies(comment.replies) + "</div>\n"
+		    end
+    end
+    str
+  end
+	def get_all_comments comments
+    str = ""
+		comments.each do |comment|
+      if comment.inverse_replies.empty?
+        str << "by: " + link_to(comment.user.username, user_path(comment.user)) + " "+ time_ago_in_words(comment.created_at) + " ago "
+		    str << link_to("Reply", reply_song_comment_path(comment.song.id,comment.id))  + "<br />"
+		    str << "<div class=\"comment\">" + h(comment.body) + "</div>\n"
+      
+        if !comment.replies.empty?
+		      str << "<div class=\"comment\">\n" + get_all_replies(comment.replies) + "</div>\n"
+		    end
+      end
 		end
 		str
 	end
 
 	def print_all_comments song
 		unless song.comments.empty?
-			return "<br />called gac: <br />" + get_all_comments(song.comments)
+			return get_all_comments(song.comments)
 		end
 	end
 end

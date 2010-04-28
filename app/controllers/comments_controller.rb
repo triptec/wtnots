@@ -1,6 +1,14 @@
 class CommentsController < ApplicationController
+  before_filter :require_user, :only => [:new, :edit, :update, :create]
   # GET /comments
   # GET /comments.xml
+  def reply
+    @comment = Comment.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @comment }
+    end 
+  end
   def index
     @comments = Comment.all
 
@@ -25,7 +33,6 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
@@ -41,9 +48,13 @@ class CommentsController < ApplicationController
   # POST /comments.xml
   def create
     @comment = Comment.new(params[:comment])
-		@comment.song = Song.find(1)
+    @comment.user = current_user
+    @comment.song = Song.find(params[:song_id])
     respond_to do |format|
       if @comment.save
+        if(params[:comment_id])
+          Replyship.create!(:comment_id => params[:comment_id], :reply_id => @comment.id)
+        end
         flash[:notice] = 'Comment was successfully created.'
         format.html { redirect_to(@comment.song) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
