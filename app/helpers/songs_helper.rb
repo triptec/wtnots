@@ -30,7 +30,7 @@ module SongsHelper
   end
 	def get_all_comments comments
     str = ""
-		comments.each do |comment|
+		comments.all(:order => "id desc").each do |comment|
       if comment.inverse_replies.empty?
         str << "by: " + link_to(comment.user.username, user_path(comment.user)) + " "+ time_ago_in_words(comment.created_at) + " ago "
 		    str << link_to("Reply", reply_song_comment_path(comment.song.id,comment.id))  + "<br />"

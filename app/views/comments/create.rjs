@@ -1,0 +1,5 @@
+page.insert_html :top, :comment_container, :partial => 'comment', :object => @comment
+page[:new_comment_container].hide
+page[:new_comment].reset
+page.insert_html :top, :flashes, "<div class=\"flash notice\">"+flash[:notice]+"</div>"
+flash.discard

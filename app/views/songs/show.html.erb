@@ -16,12 +16,11 @@
   <%=h @song.user.username %>
 </p>
 
-
-<%= print_all_comments(@song) %>
-<br />
-<br />
-<br />
-<br />
-<h2>Comment</h2>
-<%= render :partial => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
+<h2><a href="#" onclick="Element.toggle('new_comment_container')">Comment</a></h2>
+<div id="new_comment_container" style="display:none">
+  <%= render :partial => "comments/form", :object => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
+</div>
+<div id="comment_container">
+  <%= print_all_comments(@song) %>
+</div>
 

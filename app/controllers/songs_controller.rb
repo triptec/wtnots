@@ -8,7 +8,7 @@ class SongsController < ApplicationController
   # GET /songs.xml
   def index
     @title = "Songs"
-    @songs = Song.all
+    @songs = Song.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
