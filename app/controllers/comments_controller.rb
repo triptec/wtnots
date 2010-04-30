@@ -7,6 +7,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
+      format.js
+      #format.js {render :partial => "comments/form", :object => @comment, :locals => {:button_name => 'Reply'}}
     end 
   end
   def index

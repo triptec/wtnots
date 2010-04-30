@@ -1,3 +1,10 @@
-by: <%= link_to(comment.user.username, user_path(comment.user)) + " " +  time_ago_in_words(comment.created_at) %> ago 
+<% logger.info params.to_yaml %>
+<% if params[:commit] == "Reply" %>
+  <div class="comment">
+<% end %>
+  by: <%= link_to(comment.user.username, user_path(comment.user)) + " " +  time_ago_in_words(comment.created_at) %> ago 
 <%= link_to("Reply", reply_song_comment_path(comment.song.id,comment.id)) %><br />
 <div class="comment"><%=  h(comment.body) %></div>
+<% if params[:commit] == "Reply" %>
+  </div">
+<% end %>

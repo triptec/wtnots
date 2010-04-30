@@ -4,10 +4,11 @@
   <head>
     <title><%= title %></title>
     <%= render 'layouts/stylesheets' %>
-    <%= javascript_include_tag 'jquery', 'application.js' %>
     <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'redbox' %>
+    <%= javascript_include_tag 'window' %>
   </head>
-  <body>
+  <body id="body">
     <div class="container">
       <%= render 'layouts/header' %>
       <div id="content" class="round">

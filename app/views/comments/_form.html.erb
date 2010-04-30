@@ -1,10 +1,11 @@
 <% form_remote_for([@song, @comment]) do |f| %>
   <p>
-    <b>Body</b><br />
     <%= f.text_area :body %>
   </p>
 
   <p>
+  <%= hidden_field_tag ("comment_id", params[:id]) unless params[:action] == "show" %>
+  <%= hidden_field_tag "song_id", params[:song_id] %>
     <%= f.submit button_name %>
   </p>
 <% end %>
