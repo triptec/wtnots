@@ -7,8 +7,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @comment }
-      format.js
-      #format.js {render :partial => "comments/form", :object => @comment, :locals => {:button_name => 'Reply'}}
+      format.js {render :partial => "new_reply"}
     end 
   end
   def index
@@ -56,11 +55,16 @@ class CommentsController < ApplicationController
       if @comment.save
         if(params[:comment_id])
           Replyship.create!(:comment_id => params[:comment_id], :reply_id => @comment.id)
+          flash[:notice] = 'Reply was successfully created.'
+          format.html { redirect_to(@comment.song) }
+          format.xml  { render :xml => @comment, :status => :created, :location => @comment }
+          format.js {render "create_reply"}
+        else
+          flash[:notice] = 'Comment was successfully created.'
+          format.html { redirect_to(@comment.song) }
+          format.xml  { render :xml => @comment, :status => :created, :location => @comment }
+          format.js {render "create_comment"}
         end
-        flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to(@comment.song) }
-        format.xml  { render :xml => @comment, :status => :created, :location => @comment }
-        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }

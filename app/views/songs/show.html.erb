@@ -15,12 +15,8 @@
   <b>User:</b>
   <%=h @song.user.username %>
 </p>
-<%= link_to_remote ('link_to_remote',:url => {:controller => "comments", :action => "reply", :id => 1}) %><br />
-<%= link_to_prototype_window('Test Window','Hello_World',{:title => "Hello World!", :width => 200, :url => reply_song_comment_path(1,15)}) %><br />
-<%= link_to_remote_redbox ("Redbox", :url => {:controller => 'comments', :action => 'reply', :id => '1'}) %><br />
-<%= link_to("Popup", new_song_comment_path(@song), :popup => true) %>
-<h2><a href="#" onclick="Element.toggle('new_comment')">Comment</a></h2>
-  <%= render :partial => "comments/form", :object => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
+<h2><a id="toggle_new_comment" href="#">Comment</a></h2>
+  <%= render :partial => "comments/new_comment", :object => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
 <div id="comment_container">
   <%= print_all_comments(@song) %>
 </div>

@@ -1,4 +1,4 @@
 <div id="c<%= @comment.id%>" class="comment"><%= link_to(@comment.user.username, user_path(@comment.user))%> 
 <%= h(@comment.body) %><br />
 <%= time_ago_in_words(@comment.created_at) %> ago 
-<%= link_to("Reply", reply_song_comment_path(@comment.song.id,@comment.id)) %></div>
+<%= link_to("Reply", reply_song_comment_path(@comment.song.id,@comment.id),:class => "reply", :song_id => @comment.song.id,:comment_id => @comment.id) %></div>

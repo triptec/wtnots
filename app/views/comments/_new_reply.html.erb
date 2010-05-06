@@ -1,0 +1,7 @@
+<% form_for([@song, @comment],:html => {:id => "new_reply"}) do |f| %>
+    <%= f.text_area :body, :id => "new_reply" %>
+  <%= f.submit "Reply", :id => "new_reply" %>
+
+  <%= hidden_field_tag "comment_id", params[:id] %>
+  <%= hidden_field_tag "song_id", params[:song_id] %>
+<% end %>

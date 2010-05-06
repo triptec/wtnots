@@ -189,5 +189,9 @@ ul.users {
   border-left:1px dotted #999;
   margin:5px 10px;
   padding-left:5px;
-  padding-bottom:10px;
+  padding-bottom:0px;
+}
+textarea#new_reply {
+  width: 150px;
+  height:30px;
 }
