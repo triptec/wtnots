@@ -45,7 +45,6 @@ Rails::Initializer.run do |config|
   config.gem "factory_girl"
   config.gem "webrat"
   config.gem "crummy"
-  config.gem "redbox"
   config.plugins = [:all]
 #  config.gem "rack-openid"
 end
