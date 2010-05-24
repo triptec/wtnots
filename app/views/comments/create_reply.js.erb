@@ -1,1 +1,4 @@
 $('#c<%= @comment.inverse_replies[0].id %>').after('<div class="comment"><%= escape_javascript(render(:partial => "reply")) %></div>');
+$('#c<%= @comment.id %>').hide();
+$('#c<%= @comment.id %>').toggle("fast");
+

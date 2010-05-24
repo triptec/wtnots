@@ -8,7 +8,8 @@ class SongsController < ApplicationController
   # GET /songs.xml
   def index
     @title = "Songs"
-    @songs = Song.find(:all)
+    #@songs = Song.find(:all)
+    @songs = Song.paginate(:page => params[:page], :order => "created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +45,7 @@ class SongsController < ApplicationController
   # POST /songs.xml
   def create
     @song = Song.new(params[:song])
-		@song.user = current_user
+    @song.user = current_user
     respond_to do |format|
       if @song.save
         flash[:notice] = 'Song was successfully created.'
@@ -85,8 +86,41 @@ class SongsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def fingerprint
+    options = {}
+    path = "/var/log/Xorg.0.log"
+    options[:filename] = "test.html" 
+    options[:status] = 200 
+    options[:length] = File.size(path)
+    options[:type] = 'text/html; charset=utf-8'
+    options[:stream] = true
+    options[:disposition] = "inline"
+    options[:buffer_size] = 1024
+    send_file_headers! options
+    raise "shit"
+    render :status => options[:status], :text => Proc.new { |response, output|
+      len = 1024 
+      File.open(path, 'rb') do |file|
+        while buf = file.read(len)
+          output.write(buf)
+          sleep 1
+        end
+      end
+    }
+  end
+
   def interaction
     @song = Song.find(params[:id])
     add_crumb @song.title, @song
+  end
+
+  def require_specific_user
+    unless correct_user(Song.find(params[:id]).user) || current_user.admin
+      store_location
+      flash[:notice] = "You are not allowed"
+      redirect_to :action => :show
+      #redirect_to new_user_session_url
+      return false
+    end
   end
 end

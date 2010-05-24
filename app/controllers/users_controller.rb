@@ -8,8 +8,8 @@ class UsersController < ApplicationController
 
 	def index
 		@title = "All Users"
-    #@users = User.paginate(:page => params[:page])
-    @users = User.find(:all)
+    @users = User.paginate(:page => params[:page], :order => "created_at ASC")
+    #@users = User.find(:all)
 	end
   
   def new

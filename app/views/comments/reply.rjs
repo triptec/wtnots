@@ -1,1 +1,0 @@
-page.insert_html :top, "r" + params[:id], :partial => 'form', :object => @comment,:locals => {:button_name => 'Reply'}

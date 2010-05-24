@@ -19,4 +19,5 @@ class Song < ActiveRecord::Base
   validates_presence_of :user_id, :title, :description
   validates_length_of :title, :within => 5..255 
   validates_length_of :description, :minimum => 20 
+  has_attached_file :audio
 end

@@ -1,9 +1,0 @@
-if params[:commit] == "Reply"
-  page.insert_html :before, "r" + params[:comment_id], :partial => 'comment', :object => @comment
-else
-  page.insert_html :top, :comment_container, :partial => 'comment', :object => @comment
-end
-page["new_comment"].reset
-page["r" + params[:comment_id]].hide
-page.insert_html :top, :flashes, "<div class=\"flash notice\">"+flash[:notice]+"</div>"
-flash.discard

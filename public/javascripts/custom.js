@@ -23,15 +23,15 @@ $('document').ready(function(){
       return false;
     }
   );
-  $('#new_comment').submit(function(){
+  $('#new_comment').live("submit",function(){
     $.post($(this).attr('action'),$(this).serialize(),null,'script');
+    $('form#new_comment').toggle("slow");
+    $('textarea#comment_body').val("");
     return false;
   });
   $('#new_reply').live("submit", function(){
     $.post($(this).attr('action'),$(this).serialize(),null,'script');
-    $(this).fadeOut(500,function(){
-      $(this).remove();
-    });
+    $(this).hide("fast",function(){$(this).remove();});
     return false;
   });
 });

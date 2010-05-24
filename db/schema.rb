@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100424102356) do
+ActiveRecord::Schema.define(:version => 20100519175852) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
@@ -27,11 +27,14 @@ ActiveRecord::Schema.define(:version => 20100424102356) do
   end
 
   create_table "songs", :force => true do |t|
-    t.string   "title",       :null => false
-    t.text     "description", :null => false
-    t.integer  "user_id",     :null => false
+    t.string   "title",              :null => false
+    t.text     "description",        :null => false
+    t.integer  "user_id",            :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
   end
 
   create_table "users", :force => true do |t|

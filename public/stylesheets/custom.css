@@ -195,3 +195,6 @@ textarea#new_reply {
   width: 150px;
   height:30px;
 }
+td {
+  vertical-align:top;
+}

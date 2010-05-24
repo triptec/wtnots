@@ -1,6 +1,4 @@
-<%= link_to 'Back', songs_path %> |
-<%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Delete', {:action => "destroy", :id =>@song}, :confirm => "Are you sure?" %> 
+<%= links_to_song(@song) %>
 <p>
   <b>Title:</b>
   <%=h @song.title %>
@@ -15,9 +13,14 @@
   <b>User:</b>
   <%=h @song.user.username %>
 </p>
-<h2><a id="toggle_new_comment" href="#">Comment</a></h2>
-  <%= render :partial => "comments/new_comment", :object => @comment = Comment.new, :locals => { :button_name => 'Comment' } %>
+<% if @song.audio.exists? %>
+<p>
+  <b>Audio:</b>
+  <%= link_to @song.audio_file_name, @song.audio.url %>
+</p>
+<% end %>
 <div id="comment_container">
+  <%= link_to_comment %>
   <%= print_all_comments(@song) %>
 </div>
 
