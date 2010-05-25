@@ -9,12 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100519175852) do
+ActiveRecord::Schema.define(:version => 20100525140859) do
 
   create_table "comments", :force => true do |t|
     t.text     "body"
     t.integer  "song_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "puids", :force => true do |t|
+    t.string   "puid"
+    t.integer  "song_id"
+    t.integer  "integer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,14 +35,17 @@ ActiveRecord::Schema.define(:version => 20100519175852) do
   end
 
   create_table "songs", :force => true do |t|
-    t.string   "title",              :null => false
-    t.text     "description",        :null => false
-    t.integer  "user_id",            :null => false
+    t.string   "title",                                 :null => false
+    t.text     "description",                           :null => false
+    t.integer  "user_id",                               :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "audio_file_name"
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
+    t.boolean  "analyze",            :default => false
+    t.boolean  "publish",            :default => false
+    t.boolean  "processed",          :default => false
   end
 
   create_table "users", :force => true do |t|

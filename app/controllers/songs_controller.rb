@@ -9,7 +9,7 @@ class SongsController < ApplicationController
   def index
     @title = "Songs"
     #@songs = Song.find(:all)
-    @songs = Song.paginate(:page => params[:page], :order => "created_at DESC")
+    @songs = Song.paginate(:page => params[:page], :order => "created_at DESC", :conditions => {:publish => true})
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,6 +20,16 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.xml
   def show 
+    @tracks = 0
+    if @song.puids
+      require 'rbrainz'
+      @tracks = MusicBrainz::Model::Collection.new
+      @song.puids.each do |puid| 
+        query = MusicBrainz::Webservice::Query.new
+        @tracks = @tracks + query.get_tracks(MusicBrainz::Webservice::TrackFilter.new(:puid =>puid.puid))
+      end
+    end
+  
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @song }
@@ -62,7 +72,15 @@ class SongsController < ApplicationController
   # PUT /songs/1.xml
   def update
     @song = Song.find(params[:id])
-
+    if @song.audio? && params[:song]["analyze"]
+      puids = analyze_audio(@song) 
+      p = Array.new
+      puids.each do |puid|
+        p.push(Puid.new(:puid => puid))
+      end
+      @song.puids = p
+      @song.processed = true
+    end
     respond_to do |format|
       if @song.update_attributes(params[:song])
         flash[:notice] = 'Song was successfully updated.'
@@ -122,5 +140,11 @@ class SongsController < ApplicationController
       #redirect_to new_user_session_url
       return false
     end
+  end
+  def analyze_audio(song)
+    require 'earworm'
+    ew = Earworm::Client.new("0736ac2cd889ef77f26f6b5e3fb8a09c")
+    info = ew.identify(:file => song.audio.path)
+    return info.puid_list
   end
 end

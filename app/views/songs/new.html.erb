@@ -12,9 +12,19 @@
     <%= f.text_area :description %>
   </p>
   <p>
+    <%= f.label :publish %><br />
+    <%= f.check_box :publish %>
+  </p>
+  <p>
   <%= f.label 'Audio' %><br />
   <%= f.file_field :audio %>
   </p>
+  <% if @song.audio? %>
+  <p>
+    <%= f.label :analyze %><br />
+    <%= f.check_box :analyze %>
+  </p>
+  <% end %>
   <p>
     <%= f.submit 'Create' %>
   </p>

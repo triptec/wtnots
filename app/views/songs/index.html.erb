@@ -1,18 +1,22 @@
 <h1>Listing songs</h1>
 
-<%= link_to 'New song', new_song_path %>
+<%= link_to('New song', new_song_path) if current_user %>
 <%= will_paginate %>
 <table>
   <tr>
     <th>Title</th>
     <th>Description</th>
-    <th>User</th>
+    <th>Comments</th>
   </tr>
 <% @songs.each do |song| %>
   <tr>
-    <td><%= link_to song.title, song_path(song) %></td>
-    <td><%=h truncate song.description, :length => 50 %></td>
-    <td><%= link_to (truncate(song.user.username, :length => 10)), user_path(song.user.id) %></td>
+    <td>
+      <%= link_to(truncate(song.title, :length => 30), song_path(song)) %><br />
+      by: <%= link_to (truncate(song.user.username, :length => 25)), user_path(song.user.id) %>
+    
+    </td>
+    <td><%=h truncate song.description, :length => 100 %></td>
+    <td><%=h truncate song.comments.size.to_s,:length => 100 %></td>
   </tr>
 <% end %>
 </table>

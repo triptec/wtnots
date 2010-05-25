@@ -8,3 +8,5 @@ db/*.sqlite3
 *~
 .DS_Store
 .autotest
+public/system/audios/*
+public/system/audios/**/*

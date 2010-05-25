@@ -11,13 +11,50 @@
 
 <p>
   <b>User:</b>
-  <%=h @song.user.username %>
+  <%= link_to @song.user.username, user_url(@song.user.id) %>
+</p>
+<p>
+  <b>Published:</b>
+  <%=  "&#x2713" if @song.publish %>
 </p>
 <% if @song.audio.exists? %>
-<p>
-  <b>Audio:</b>
-  <%= link_to @song.audio_file_name, @song.audio.url %>
-</p>
+  <p>
+    <b>Audio:</b>
+    <%= link_to @song.audio_file_name, @song.audio.url %><br />
+    <audio src="<%= @song.audio.url %>" controls autobuffer></audio>
+  </p>
+  <p>
+    <b>Analyzed:</b>
+    <%= "&#x2713" if @song.analyze && @song.processed %>
+  </p>
+  <% if @song.processed && @tracks.size <= 0 %>
+  <p>
+    The audio analysis did not return any information.
+  </p>
+  <% end %>
+<% end %>
+<% if @tracks.size > 0 %>
+  <table>
+    <tr>
+      <th>Score:</th>
+      <th>Track:</th>
+      <th>Artist:</th>
+      <th>Duration:</th>
+      <th>Releases:</th>
+    </tr>
+    <% @tracks.each do |t| %>
+      <tr>
+        <td><%= t.score %></td>
+        <td><%= t.entity.title %></td>
+        <td><%= t.entity.artist.name %></td>
+        <td><%= format("%.2f",(t.entity.duration.to_f/1000/60)) %></td>
+        <td><% t.entity.releases.sort.each do |m| %>
+            <%= m.to_s %><br />
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
 <% end %>
 <div id="comment_container">
   <%= link_to_comment %>

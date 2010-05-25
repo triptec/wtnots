@@ -1,4 +1,7 @@
 <h2><%=h @user.name %></h2>
+<table>
+  <tr>
+    <td>
 <%= gravatar_for @user %>
 <p>
   <b>Username:</b>
@@ -54,3 +57,12 @@
   <%= link_to 'Edit', edit_user_path(@user) %>
   <%= link_to 'Delete', @user, :method => :delete, :confirm => "Are you sure?" %>
 <% end %>
+</td>
+<td>
+  Songs by user: <br />
+  <% @songs.each do |s| %>
+    <%= link_to truncate(s.title, :length => 50), song_url(s) %><br />
+  <% end %>
+</td>
+</tr>
+</table>

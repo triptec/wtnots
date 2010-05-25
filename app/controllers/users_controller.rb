@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   
   def show
 		@title = "Profile: " + @user.username 
+    @songs = Song.find(:all, :order => "created_at DESC", :conditions => {:user_id => @user})
   end
 
   def edit
